@@ -86,20 +86,20 @@ public class CustomUIController : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) // Chuột trái
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                var customTarget = hit.collider.GetComponent<PlayerCharacterCustomized>();
-                if (customTarget != null)
-                {
-                    Debug.Log($"Clicked on: {customTarget.gameObject.name}");
-                    ShowUIForModel(customTarget.gameObject);
-                }
-            }
-        }
-    }
+    // void Update()
+    // {
+    //     if (Input.GetMouseButtonDown(0)) // Chuột trái
+    //     {
+    //         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //         if (Physics.Raycast(ray, out RaycastHit hit))
+    //         {
+    //             var customTarget = hit.collider.GetComponent<PlayerCharacterCustomized>();
+    //             if (customTarget != null)
+    //             {
+    //                 Debug.Log($"Clicked on: {customTarget.gameObject.name}");
+    //                 ShowUIForModel(customTarget.gameObject);
+    //             }
+    //         }
+    //     }
+    // }
 }
