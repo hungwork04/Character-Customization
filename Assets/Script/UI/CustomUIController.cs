@@ -33,7 +33,7 @@ public class CustomUIController : MonoBehaviour
 
     public GameObject CreateUIForModel(GameObject model)
     {
-        PlayerCharacterCustomized custom = model.GetComponent<PlayerCharacterCustomized>();
+        PrefabSwapperCustomizer custom = model.GetComponent<PrefabSwapperCustomizer>();
         if (custom == null) return null;
 
         GameObject uiParent = new GameObject($"UI_{model.name}", typeof(RectTransform));
@@ -45,19 +45,44 @@ public class CustomUIController : MonoBehaviour
         uiParentRect.offsetMax = Vector2.zero;
         uiParentRect.localScale = Vector3.one;
 
-        for (int i = 0; i < custom.bodyPartDataArray.Count; i++)
+        for (int i = 0; i < custom.parts.Count; i++)
         {
             int index = i;
             GameObject elementGO = SpawnUIElement(Positions[i], uiParent.transform);
             UIElement element = elementGO.GetComponent<UIElement>();
-            element.bodyPartName.text = custom.bodyPartDataArray[i].name;
+            //element.bodyPartName.text = custom.parts[i].name;
             element.left.onClick.AddListener(() => custom.LeftButtonChange(index));
             element.right.onClick.AddListener(() => custom.RightButtonChange(index));
         }
 
         return uiParent;
     }
+    public GameObject CreateUIForModel2(GameObject model)
+    {
+        PrefabSwapperCustomizer custom = model.GetComponent<PrefabSwapperCustomizer>();
+        if (custom == null) return null;
 
+        GameObject uiParent = new GameObject($"UI_{model.name}", typeof(RectTransform));
+        uiParent.transform.SetParent(parentUI, false);
+        RectTransform uiParentRect = uiParent.GetComponent<RectTransform>();
+        uiParentRect.anchorMin = Vector2.zero;
+        uiParentRect.anchorMax = Vector2.one;
+        uiParentRect.offsetMin = Vector2.zero;
+        uiParentRect.offsetMax = Vector2.zero;
+        uiParentRect.localScale = Vector3.one;
+
+        for (int i = 0; i < custom.parts.Count; i++)   
+        {
+            int index = i;
+            GameObject elementGO = SpawnUIElement(Positions[i], uiParent.transform);
+            UIElement element = elementGO.GetComponent<UIElement>();
+            element.bodyPartName.text = custom.parts[i].ToString();
+            element.left.onClick.AddListener(() => custom.LeftButtonChange(index));
+            element.right.onClick.AddListener(() => custom.RightButtonChange(index));
+        }
+
+        return uiParent;
+    }
     public void ShowUIForModel(GameObject model)
     {
         // Ẩn UI hiện tại nếu có
@@ -77,7 +102,7 @@ public class CustomUIController : MonoBehaviour
         else
         {
             // Chưa có UI thì tạo mới
-            GameObject newUI = CreateUIForModel(model);
+            GameObject newUI = CreateUIForModel2(model);
             if (newUI != null)
             {
                 uiPerCharacter.Add(model, newUI);
@@ -86,20 +111,4 @@ public class CustomUIController : MonoBehaviour
         }
     }
 
-    // void Update()
-    // {
-    //     if (Input.GetMouseButtonDown(0)) // Chuột trái
-    //     {
-    //         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    //         if (Physics.Raycast(ray, out RaycastHit hit))
-    //         {
-    //             var customTarget = hit.collider.GetComponent<PlayerCharacterCustomized>();
-    //             if (customTarget != null)
-    //             {
-    //                 Debug.Log($"Clicked on: {customTarget.gameObject.name}");
-    //                 ShowUIForModel(customTarget.gameObject);
-    //             }
-    //         }
-    //     }
-    // }
 }

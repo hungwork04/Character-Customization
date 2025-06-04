@@ -16,7 +16,7 @@ public class InputHandler : MonoBehaviour
              Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                var customTarget = hit.collider.GetComponent<PlayerCharacterCustomized>();
+                var customTarget = hit.collider.GetComponent<PrefabSwapperCustomizer>();
                 if (customTarget != null)
                 {
                     Debug.Log($"Clicked on: {customTarget.gameObject.name}");
