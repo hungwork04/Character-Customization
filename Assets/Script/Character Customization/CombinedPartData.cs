@@ -1,43 +1,52 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 
 [Serializable]
 public class CombinedPartData : BasePartData
 {
-    // public enum PartType
-    // {
-    //     MeshMaterial,
-    //     PrefabPart
-    // }
+    public enum PartType
+    {
+        MeshMaterial,
+        PrefabPart,
+        BodyPartDisable
+    }
 
-    // public PartType partType;
+    public PartType partType;
 
-    // // MeshMaterial data
-    // public Renderer render;
-    //     [Serializable]
-    // public class MeshMaterialSet
-    // {
-    //     [SerializeField]
-    //     public Mesh mesh;
-    //     [SerializeField]
-    //     public Material[] materials;
-    // }
-    // public List<MeshMaterialSet> variants = new();
+  [Header("▶ MeshMaterial Data")]
+    public Renderer render;
 
-    // // Prefab data
-    // public List<SkinnedMeshRenderer> partPrefabs = new();
-    // public GameObject parentOBJ;
-    // public Transform[] bones;     // 👈 moved here
-    // public Transform rootBone;    // 👈 moved here
+    [Serializable]
+    public class MeshMaterialSet
+    {
+        public Mesh mesh;
+        public Material[] materials;
+    }
 
-    // public override int GetVariantCount()
-    // {
-    //     return partType switch
-    //     {
-    //         PartType.MeshMaterial => variants.Count,
-    //         PartType.PrefabPart => partPrefabs.Count,
-    //         _ => 0
-    //     };
-    // }
+    public List<MeshMaterialSet> variants = new();
+
+    [Space(10)]
+    [Header("▶ PrefabPart & BodyPartDisable Data")]
+    public List<GameObject> partPrefabs = new();
+    public GameObject parentOBJ;
+    public Transform[] bones;
+    public Transform rootBone;
+    public SkinnedMeshRenderer SkinMesh;
+
+    // ▼ Chỉ dùng riêng cho BodyPartDisable
+    [Space(10)]
+    [Header("▶ Chỉ dùng cho BodyPartDisable")]
+    public List<GameObject> disableObjects = new();
+    public override int GetVariantCount()
+    {
+        return partType switch
+        {
+            PartType.MeshMaterial => variants.Count,
+            PartType.PrefabPart => partPrefabs.Count,
+            PartType.BodyPartDisable=>partPrefabs.Count,
+            _ => 0
+        };
+    }
 }
