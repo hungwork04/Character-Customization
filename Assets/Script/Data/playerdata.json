@@ -1,0 +1,85 @@
+{
+    "Models": [
+        {
+            "ID": "Model_A1",
+            "isStartCustom": true,
+            "isUnlocked": true
+        },
+        {
+            "ID": "Model_B",
+            "isStartCustom": true,
+            "isUnlocked": true
+        },
+        {
+            "ID": "Model_C",
+            "isStartCustom": false,
+            "isUnlocked": false
+        }
+    ],
+    "BodyParts": [
+        {
+            "ID": "A1_hair",
+            "SkinParts": [
+                {
+                    "ID": "A1_hair_001",
+                    "skinRefType": 1,
+                    "skinModelIDs": [
+                        "Model_A1"
+                    ],
+                    "isStartCustom": true,
+                    "isUnlocked": true
+                },
+                {
+                    "ID": "A1_hair_002",
+                    "skinRefType": 1,
+                    "skinModelIDs": [
+                        "Model_A1"
+                    ],
+                    "isStartCustom": true,
+                    "isUnlocked": true
+                },
+                {
+                    "ID": "A1_hair_003",
+                    "skinRefType": 1,
+                    "skinModelIDs": [
+                        "Model_A1"
+                    ],
+                    "isStartCustom": true,
+                    "isUnlocked": true
+                }
+            ]
+        },
+        {
+            "ID": "B_beard",
+            "SkinParts": [
+                {
+                    "ID": "beard_001",
+                    "skinRefType": 0,
+                    "skinModelIDs": [
+                        "Model_B"
+                    ],
+                    "isStartCustom": true,
+                    "isUnlocked": true
+                },
+                {
+                    "ID": "beard_002",
+                    "skinRefType": 0,
+                    "skinModelIDs": [
+                        "Model_B"
+                    ],
+                    "isStartCustom": true,
+                    "isUnlocked": true
+                },
+                {
+                    "ID": "beard_003",
+                    "skinRefType": 0,
+                    "skinModelIDs": [
+                        "Model_B"
+                    ],
+                    "isStartCustom": true,
+                    "isUnlocked": true
+                }
+            ]
+        }
+    ]
+}

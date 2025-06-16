@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public abstract class BaseCharacterCustomizer<T> : MonoBehaviour where T : BasePartData
 {
+    //k dung
     [SerializeField] public List<T> parts = new List<T>();
 
     public void RightButtonChange(int index)
@@ -20,6 +21,7 @@ public abstract class BaseCharacterCustomizer<T> : MonoBehaviour where T : BaseP
 
         var data = parts[index];
         int variantIndex = (data.currentIndex - 1 + data.GetVariantCount()) % data.GetVariantCount();
+        
         ApplyVariant(data, variantIndex);
     }
 

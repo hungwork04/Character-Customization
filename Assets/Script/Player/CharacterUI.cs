@@ -8,10 +8,12 @@ public class CharacterUI : MonoBehaviour, ICharacterObserver
     CharacterSelector characterSelector;
     CustomUIController UIController;
     public TextMeshProUGUI CharacterName;
+    CharacterCustomizationManager characterCustomizationManager;
     void Awake()
     {
         characterSelector=FindAnyObjectByType<CharacterSelector>();
         UIController= FindAnyObjectByType<CustomUIController>();
+        characterCustomizationManager=FindAnyObjectByType<CharacterCustomizationManager>();
     }
 
     //public TextMeshProUGUI nameText;
@@ -20,13 +22,13 @@ public class CharacterUI : MonoBehaviour, ICharacterObserver
     {
         int thisInt=characterSelector.characters.IndexOf(character);
         CharacterName.text = character.gameObject.name;
-        var customTarget =characterSelector.characters[thisInt].GetComponent<CombinedCustomizer>();
-        if (customTarget != null)
-        {
-            Debug.Log($" On: {customTarget.gameObject.name}");
+        // var customTarget =characterSelector.characters[thisInt].GetComponent<CombinedCustomizer>();
+        // if (customTarget != null)
+        // {
+        //     Debug.Log($" On: {customTarget.gameObject.name}");
             if(UIController!=null)
-                UIController.ShowUIForModel(customTarget.gameObject);
-        }
+                UIController.ShowUIForModel(characterCustomizationManager.modelGameObjects[thisInt]);
+        //}
     }
 
     public void OnCharacterHidden(CharacterModel character)

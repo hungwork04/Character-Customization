@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIElement : MonoBehaviour
 {
     public TextMeshProUGUI bodyPartName;
+    public TextMeshProUGUI quantity;
     public Button left;
     public Button right;
     

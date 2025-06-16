@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class CombinedCustomizer : BaseCharacterCustomizer<CombinedPartData>
 {
+    //k dung
     protected override void ApplyVariant(CombinedPartData data, int variantIndex)
     {
         data.currentIndex = variantIndex;
@@ -70,14 +71,15 @@ public class CombinedCustomizer : BaseCharacterCustomizer<CombinedPartData>
 
         // Instantiate and setup
         //var newPart = GameObject.Instantiate(data.partPrefabs[variantIndex]);
-        GameObject newObj = GameObject.Instantiate(data.partPrefabs[variantIndex]);
-        SkinnedMeshRenderer newPart = newObj.GetComponentInChildren<SkinnedMeshRenderer>();
 
-        newPart.bones = data.bones;
-        newPart.rootBone = data.rootBone;
+        // GameObject newObj = GameObject.Instantiate(data.partPrefabs[variantIndex]);
+        // SkinnedMeshRenderer newPart = newObj.GetComponentInChildren<SkinnedMeshRenderer>();
 
-        if (data.parentOBJ != null)
-            newObj.transform.SetParent(data.parentOBJ.transform, false);
+        // newPart.bones = data.bones;
+        // newPart.rootBone = data.rootBone;
+
+        // if (data.parentOBJ != null)
+        //     newObj.transform.SetParent(data.parentOBJ.transform, false);
     }
 
 
@@ -125,13 +127,14 @@ public class CombinedCustomizer : BaseCharacterCustomizer<CombinedPartData>
         //     }
         //     return;
         // }
-        var newObj = Instantiate(data.partPrefabs[variantIndex]);
-        SkinnedMeshRenderer newPart = newObj.GetComponentInChildren<SkinnedMeshRenderer>();
-        newObj.gameObject.SetActive(true);
-        // newPart.bones = data.bones;
-        // newPart.rootBone = data.rootBone;
 
-        if (data.parentOBJ != null)
-            newObj.transform.SetParent(data.parentOBJ.transform, false);
+        // var newObj = Instantiate(data.partPrefabs[variantIndex]);
+        // SkinnedMeshRenderer newPart = newObj.GetComponentInChildren<SkinnedMeshRenderer>();
+        // newObj.gameObject.SetActive(true);
+        // // newPart.bones = data.bones;
+        // // newPart.rootBone = data.rootBone;
+
+        // if (data.parentOBJ != null)
+        //     newObj.transform.SetParent(data.parentOBJ.transform, false);
     }
 }

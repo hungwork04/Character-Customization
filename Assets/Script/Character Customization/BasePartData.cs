@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
+
 [Serializable]
-public abstract class BasePartData 
+public abstract class BasePartData
 {
     public string partName;
-    [HideInInspector] public int currentIndex = 0;
+    [HideInInspector] public int currentIndex = -1;
 
     public abstract int GetVariantCount();
 }

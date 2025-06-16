@@ -19,45 +19,23 @@ public class CustomUIController : MonoBehaviour
     private Dictionary<GameObject, GameObject> uiPerCharacter = new Dictionary<GameObject, GameObject>();
 
     public ScrollRect scrollView;
+    CharacterCustomizationManager custom;
 
-
+    void Awake()
+    {
+        custom=FindAnyObjectByType<CharacterCustomizationManager>();
+    }
     public GameObject SpawnUIElement(Transform parent)
     {
         GameObject newElement = Instantiate(UICustomCharacterE, parent);
-        RectTransform newRect = newElement.GetComponent<RectTransform>();
+        //RectTransform newRect = newElement.GetComponent<RectTransform>();
         return newElement;
     }
 
-    // public GameObject CreateUIForModel(GameObject model)
-    // {
-    //     CombinedCustomizer custom = model.GetComponent<CombinedCustomizer>();
-    //     if (custom == null) return null;
-
-    //     GameObject uiParent = new GameObject($"UI_{model.name}", typeof(RectTransform));
-    //     uiParent.transform.SetParent(parentUI, false);
-    //     RectTransform uiParentRect = uiParent.GetComponent<RectTransform>();
-    //     uiParentRect.anchorMin = Vector2.zero;
-    //     uiParentRect.anchorMax = Vector2.one;
-    //     uiParentRect.offsetMin = Vector2.zero;
-    //     uiParentRect.offsetMax = Vector2.zero;
-    //     uiParentRect.localScale = Vector3.one;
-
-    //     for (int i = 0; i < custom.parts.Count; i++)
-    //     {
-    //         int index = i;
-    //         GameObject elementGO = SpawnUIElement(Positions[i], uiParent.transform);
-    //         UIElement element = elementGO.GetComponent<UIElement>();
-    //         //element.bodyPartName.text = custom.parts[i].name;
-    //         element.left.onClick.AddListener(() => custom.LeftButtonChange(index));
-    //         element.right.onClick.AddListener(() => custom.RightButtonChange(index));
-    //     }
-
-    //     return uiParent;
-    // }
     public GameObject ContentGO;
     public GameObject CreateUIForModel(GameObject model)
     {
-        CombinedCustomizer custom = model.GetComponent<CombinedCustomizer>();
+        //Debug.Log("!");
         if (custom == null) return null;
         GameObject uiParent= Instantiate(ContentGO);
         // GameObject uiParent = new GameObject($"UI_{model.name}", typeof(RectTransform));
@@ -65,21 +43,24 @@ public class CustomUIController : MonoBehaviour
         uiParent.transform.SetParent(parentUI, false);
 
 
-
-        for (int i = 0; i < custom.parts.Count; i++)   
+        string id=model.GetComponent<ModelIdentifier>().modelID;
+        //Debug.Log(custom.GetAvailableSkinParts(id).Count);
+        for (int i = 0; i < custom.GetAvailableBodyParts(id).Count; i++)   
         {
             int index = i;
             GameObject elementGO = SpawnUIElement(uiParent.transform);
             UIElement element = elementGO.GetComponent<UIElement>();
-            element.bodyPartName.text = custom.parts[i].partName;
-            element.left.onClick.AddListener(() => custom.LeftButtonChange(index));
-            element.right.onClick.AddListener(() => custom.RightButtonChange(index));
+            element.bodyPartName.text = custom.GetAvailableBodyParts(id)[i].ID;
+            element.left.onClick.AddListener(() => custom.LeftButtonChange(index));//đổi
+            element.right.onClick.AddListener(() => custom.RightButtonChange(index));//đổi
+           // Debug.Log(custom.GetAvailableBodyParts(id)[i].ID);
         }
 
         return uiParent;
     }
     public void ShowUIForModel(GameObject model)
     {
+    //    Debug.Log("1");
         // Ẩn UI hiện tại nếu có
         if (currentUIParent != null)
         {
@@ -103,6 +84,7 @@ public class CustomUIController : MonoBehaviour
                 uiPerCharacter.Add(model, newUI);
                 currentUIParent = newUI;
                 scrollView.content = currentUIParent.GetComponent<RectTransform>();
+//            Debug.Log("1");
             }
         }
     }
